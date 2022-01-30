@@ -1,5 +1,5 @@
 # Robot-Control
-My elaboration of a program for control of a 6-DOF robot with graphical interface. It uses <a href="https://github.com/joan2937/pigpio">pigpio</a> for proper PWM management and  <a href="https://www.pygame.org/">pygame</a> for input management, be it by keyboard or by controller, in my case a <a href="https://pythonhosted.org/triangula/sixaxis.html">PS3 controller</a>.
+My elaboration of a program for control of a 6-DOF robot via a Raspberry Pi with graphical interface. It uses <a href="https://github.com/joan2937/pigpio">pigpio</a> for proper PWM management and  <a href="https://www.pygame.org/">pygame</a> for input management, be it by keyboard or by controller, in my case a <a href="https://pythonhosted.org/triangula/sixaxis.html">PS3 controller</a>.
 
 My robot has a servo in the base, which moves horizontally (servopin1). Servo 2,3,4 move the robots' members vertically, Servo5 rotates the claw, which is opened and closed by Servo 6.
 
