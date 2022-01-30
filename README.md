@@ -3,7 +3,7 @@ My elaboration of a program for control of a 6-DOF robot via a Raspberry Pi with
 
 My robot has a servo in the base, which moves horizontally (servopin1). Servo 2,3,4 move the robots' members vertically, Servo5 rotates the claw, which is opened and closed by Servo 6.
 
-It's a chinese aluminium case robot I bought for about € 30 plus six metal gear servos which operate at about 5V.
+It's one of those chinese aluminium case robots I bought for about € 30 plus six metal gear servos which operate at about 5V. You need to provide power from an independent supply, the Pi will be overstrained! To be sure not to harm your Pi, you should use resistors on the signal wires. You need to wire the Pi and the power supply to the same ground level, else it will not work properly. <b><i>Mistakes in the wiring may easily result in destruction of your Pi.</i></b>
 
 The interface supports input through keyboard (arrow keys), left/right arrow for servo choice, up/down for increase/decrease pulse wave (PW). PageUp/PageDown for increase/decrease of increase/decrease steps. 
 
