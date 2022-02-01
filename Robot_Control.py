@@ -34,7 +34,6 @@ servopin6 = 27
 
 servopwm=copy(neutral)	#used numpy for array copy. else leads to something like pointers and will not work with my code
 tmp=copy(neutral)
-active=1
 
 def moveServo(act, pulse):	# a function to move the servos. It contains a smoothing algorithm, preventing all too sudden movements of the robot. experimental, not elaborated to satisfaction
     incTime=1.0/100.0
@@ -98,6 +97,8 @@ buttons = joystick.get_numbuttons()
 axes = joystick.get_numaxes()
 #clock = pygame.time.Clock() #maybe useful, if you want to reduce CPU load. Then you'd need to activate the created object, last lines of main loop below
 axfactor = 6 #auxiliary variable: when using a gamepad, you can adjust the velocity of movement for each command given by axis: the further you push, the faster the movement. (Experimental)
+active=1
+done = False
 
 servo.set_servo_pulsewidth(servopin1, neutral[0]) #default settings
 servo.set_servo_pulsewidth(servopin2, neutral[1])
@@ -108,10 +109,10 @@ servo.set_servo_pulsewidth(servopin6, neutral[5])
 
 fnt = pygame.font.SysFont("Calibri",35)
 
-while True:	#main loop
+while not done:	#main loop
 	for event in pygame.event.get(): # User did something
 		if event.type == pygame.QUIT: # If user clicked close
-			break # exit this loop
+			done = True # exit main loop
 		elif event.type == pygame.KEYDOWN:
 			if event.key == pygame.K_RIGHT: #right arrow: change active servo to next
 				active += 1
@@ -289,6 +290,5 @@ while True:	#main loop
 	if (servopwm[active-1] != tmp[active-1]): #if the active servo got a new value, the moveServo function is run
 		moveServo(active, servopwm[active-1])
 #        clock.tick(10)
-finally:
-    servo.stop
-    pygame.quit()
+servo.stop
+pygame.quit()
