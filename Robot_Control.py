@@ -100,7 +100,7 @@ axfactor = 6 #auxiliary variable: when using a gamepad, you can adjust the veloc
 active=1
 done = False
 
-servo.set_servo_pulsewidth(servopin1, neutral[0]) #default settings
+servo.set_servo_pulsewidth(servopin1, neutral[0]) #default settings. BEWARE: this is unsmoothed motion, will make your robot JUMP to default settings!
 servo.set_servo_pulsewidth(servopin2, neutral[1])
 servo.set_servo_pulsewidth(servopin3, neutral[2])
 servo.set_servo_pulsewidth(servopin4, neutral[3])
