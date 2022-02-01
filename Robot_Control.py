@@ -157,7 +157,7 @@ while not done:	#main loop
 						active += 1
 						if active > 6:
 							active = 1
-				elif i==4:							#this is L1, following R1; controls servo 5
+				elif i==4:							#this is L1, followed by R1; controls servo 5
 					if button == True:
 						active=5
 						servopwm[active-1] -= inc[active-1]
@@ -197,7 +197,7 @@ while not done:	#main loop
 						servopwm[active-1] -= axfactor * abs(axis)
 						if servopwm[active-1] < minmum[active-1]:
 							servopwm[active-1] = minmum[active-1]
-				elif i==1:							#linker stick, u-d
+				elif i==1:							#left stick, u-d
 					if axis ==0:
 						pass
 					elif axis <0:					#move forward
