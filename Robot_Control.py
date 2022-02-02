@@ -66,6 +66,7 @@ def moveServo(act, pulse):	# a function to move the servos. It contains a smooth
             servo.set_servo_pulsewidth(servopin6, int(tmp[act-1]+x*incMove))
             time.sleep(incTime)
     tmp[act-1]=servopwm[act-1]
+
 def draw_interface():# function draws the graphic interface
         screen.fill(pygame.Color('white'))
         s1_rect = pygame.draw.rect(screen,pygame.Color('black'),[0,0,200,200],5)
