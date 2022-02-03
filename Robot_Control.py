@@ -19,7 +19,7 @@ import pigpio, time, pygame, subprocess
 from numpy import copy
 
 if subprocess.getoutput('pigs t') == "socket connect failed":#initiate pigpiod daemon, if it doesn't already run, start it. needed for accurate PWM on several GPIO pins
-    subprocess.run("sudo pigpiod", shell=True)
+    subprocess.run("sudo pigpiod", shell=True, check=False)
     time.sleep(2)
 
 minmum=[1150,1250,520,500,500,1200]#[770,500,500,500,500,1400] 			the minimum/maximum PW for each servo. 
