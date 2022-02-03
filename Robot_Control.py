@@ -15,11 +15,13 @@
 # L2 and R2 control Servo5, triangle and square close and open the claw.
 # More comments follow at respective steps in the code.
 
-import pigpio, time, pygame, os
+import pigpio, time, pygame, subprocess
 from numpy import copy
 
-os.system("sudo pigpiod") #initiate pigpiod, needed for accurate PWM on several GPIO pins
-time.sleep(2)
+if subprocess.getoutput('pigs t') == "socket connect failed":#initiate pigpiod daemon, if it doesn't already run, start it. needed for accurate PWM on several GPIO pins
+    subprocess.run("sudo pigpiod", shell=True)
+    time.sleep(2)
+
 minmum=[1150,1250,520,500,500,1200]#[770,500,500,500,500,1400] 			the minimum/maximum PW for each servo. 
 maxmum=[2500,2150,1400,2500,2500,2050]#[2500,1250,1400,2500,2500,2050]	Settings depend on your robot and your needs.
 neutral=[1650,1250,1050,1700,1500,1800]#[1650,1250,1050,1700,1500,1800]	I saved a preliminary values which work in these comments, am experimenting with the uncommented values.
