@@ -37,12 +37,14 @@ servopin6 = 27
 servopwm=copy(neutral)	#used numpy for array copy. else leads to something like pointers and will not work with my code
 tmp=copy(neutral)
 active=1
+    axfactor = 6 #auxiliary variable: when using a gamepad, you can adjust the velocity of movement for each command given by axis: the further you push, the faster the movement. (Experimental)
 done = False
 clock = pygame.time.Clock() #maybe useful, if you want to reduce CPU load. Then you'd need to activate the created object, last lines of main loop below
 
 def moveServo(act, pulse):	# a function to move the servos. It contains a smoothing algorithm, preventing all too sudden movements of the robot. experimental, not elaborated to satisfaction
     incTime=1.0/100.0
-    incMove=(servopwm[act-1] - tmp[act-1])/100
+    servopwm[act-1] = pulse
+    incMove=(pulse - tmp[act-1])/100
     if act == 1:
         for x in range(100):
             servo.set_servo_pulsewidth(servopin1, int(tmp[act-1]+x*incMove))
@@ -67,7 +69,7 @@ def moveServo(act, pulse):	# a function to move the servos. It contains a smooth
         for x in range(100):
             servo.set_servo_pulsewidth(servopin6, int(tmp[act-1]+x*incMove))
             time.sleep(incTime)
-    tmp[act-1]=servopwm[act-1]
+    tmp[act-1]=pulse
 
 def draw_interface():# function draws the graphic interface
         screen.fill(pygame.Color('white'))
@@ -155,7 +157,6 @@ for i in range(joystick_count):
 try:#try-except checks whether a joystick is connected
     buttons = joystick.get_numbuttons()
     axes = joystick.get_numaxes()
-    axfactor = 6 #auxiliary variable: when using a gamepad, you can adjust the velocity of movement for each command given by axis: the further you push, the faster the movement. (Experimental)
 
     while not done:	#main loop
         for event in pygame.event.get(): # User did something
