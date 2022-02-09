@@ -37,7 +37,7 @@ servopin6 = 27
 servopwm=copy(neutral)	#used numpy for array copy. else leads to something like pointers and will not work with my code
 tmp=copy(neutral)
 active=1
-    axfactor = 6 #auxiliary variable: when using a gamepad, you can adjust the velocity of movement for each command given by axis: the further you push, the faster the movement. (Experimental)
+axfactor = 6 #auxiliary variable: when using a gamepad, you can adjust the velocity of movement for each command given by axis: the further you push, the faster the movement. (Experimental)
 done = False
 clock = pygame.time.Clock() #maybe useful, if you want to reduce CPU load. Then you'd need to activate the created object, last lines of main loop below
 
