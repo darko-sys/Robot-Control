@@ -5,7 +5,7 @@
 # which is opened and closed by Servo 6.
 # It's a chinese aluminium case robot I bought for about € 30 plus
 # six metal gear servos which operate at about 5V.
-# The interface supports input through keyboard (arrow keys), left/right
+# The interface supports input through keyboard (arrow and wasd keys), left/right
 # arrow for servo choice, up/down for increase/decrease pulse wave (PW). PageUp/PageDown for
 # increase/decrease of increase/decrease step. 
 # It can also be controlled by a joystick/gamepad. I managed to connect a PS3 controller
@@ -136,7 +136,7 @@ servo = pigpio.pi()
 if not servo.connected:
     exit()
 
-servo.set_servo_pulsewidth(servopin1, neutral[0]) #default settings
+servo.set_servo_pulsewidth(servopin1, neutral[0]) #default settings - will make your robot jump instantly to the settings, no smoothing!
 servo.set_servo_pulsewidth(servopin2, neutral[1])
 servo.set_servo_pulsewidth(servopin3, neutral[2])
 servo.set_servo_pulsewidth(servopin4, neutral[3])
@@ -145,7 +145,7 @@ servo.set_servo_pulsewidth(servopin6, neutral[5])
 
 pygame.init() #pygame setup
 screen = pygame.display.set_mode((600,400))
-fnt = pygame.font.SysFont("Calibri",35)
+fnt = pygame.font.SysFont("Calibri",25)
 pygame.display.set_caption("Servocontrol Display and Event Handler")
 pygame.joystick.init()
 
@@ -163,19 +163,19 @@ try:#try-except checks whether a joystick is connected
             if event.type == pygame.QUIT: # If user clicked close
                 done = True # exit this loop
             elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_RIGHT: #right arrow: change active servo to next
+                if event.key == pygame.K_RIGHT or event.type == pygame.K_d: #right arrow: change active servo to next
                     active += 1
                     if active > 6:
                         active = 1
-                elif event.key == pygame.K_LEFT: #left arrow: change active servo
+                elif event.key == pygame.K_LEFT or event.type == pygame.K_a: #left arrow: change active servo
                     active -= 1
                     if active < 1:
                         active = 6
-                elif event.key == pygame.K_UP:	#this is where movement is being initiated: active servo PW upped
+                elif event.key == pygame.K_UP or event.type == pygame.K_w:	#this is where movement is being initiated: active servo PW upped
                     servopwm[active-1] += inc[active-1]
                     if servopwm[active-1] > maxmum[active-1]:
                         servopwm[active-1] = maxmum[active-1]
-                elif event.key == pygame.K_DOWN:
+                elif event.key == pygame.K_DOWN or event.type == pygame.K_s:
                     servopwm[active-1] -= inc[active-1]
                     if servopwm[active-1] < minmum[active-1]:
                         servopwm[active-1] = minmum[active-1]
@@ -308,19 +308,19 @@ except NameError:
             if event.type == pygame.QUIT: # If user clicked close
                 done = True # exit this loop
             elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_RIGHT: #right arrow: change active servo to next
+                if event.key == pygame.K_RIGHT or event.type == pygame.K_d: #right arrow: change active servo to next
                     active += 1
                     if active > 6:
                         active = 1
-                elif event.key == pygame.K_LEFT: #left arrow: change active servo
+                elif event.key == pygame.K_LEFT or event.type == pygame.K_a: #left arrow: change active servo
                     active -= 1
                     if active < 1:
                         active = 6
-                elif event.key == pygame.K_UP:	#this is where movement is being initiated: active servo PW upped
+                elif event.key == pygame.K_UP or event.type == pygame.K_w:	#this is where movement is being initiated: active servo PW upped
                     servopwm[active-1] += inc[active-1]
                     if servopwm[active-1] > maxmum[active-1]:
                         servopwm[active-1] = maxmum[active-1]
-                elif event.key == pygame.K_DOWN:
+                elif event.key == pygame.K_DOWN or event.type == pygame.K_s:
                     servopwm[active-1] -= inc[active-1]
                     if servopwm[active-1] < minmum[active-1]:
                         servopwm[active-1] = minmum[active-1]
