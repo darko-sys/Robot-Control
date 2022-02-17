@@ -212,7 +212,7 @@ try:#try-except checks whether a joystick is connected
                             active += 1
                             if active > 6:
                                 active = 1
-                    elif i==4:							#this is L1, following R1; controls servo 5
+                    elif i==4:							#this is L1, followed by R1; controls servo 5, claw rotation
                         if button == True:
                             active=5
                             servopwm[active-1] -= inc[active-1]
