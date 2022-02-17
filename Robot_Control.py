@@ -183,10 +183,10 @@ try:#try-except checks whether a joystick is connected
                     inc[active-1] += 25
                 elif event.key == pygame.K_PAGEDOWN:
                     inc[active-1] -= 25
-            elif event.type == pygame.JOYBUTTONDOWN: 	#first four buttons are the arrow buttons on PS3 controller
+            elif event.type == pygame.JOYBUTTONDOWN: 	#buttons 13-16 are the arrow buttons on PS3 controller
                 for i in range(buttons):				#same meaning as keyboard arrows
                     button = joystick.get_button(i)
-                    if i == 1:
+                    if i == 1:                          #circle and x button increase/decrease PWM steps (of active servo)
                         if button == True:
                             inc[active-1] += 25
                     elif i==0:
