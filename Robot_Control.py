@@ -240,40 +240,40 @@ try:#try-except checks whether a joystick is connected
                 for i in range(axes):
                     axis = joystick.get_axis(i)
                     if i == 0:							#left stick, x-y
-                        if axis == 0:
+                        if axis <= 0.1 and >= -0.1:#if your joystick has a lot of jitter, increase this number; the axis buttons are almost never at zero when idle
                             pass
-                        elif axis > 0:
+                        elif axis > 0.1:
                             active=1
                             servopwm[active-1] += axfactor * abs(axis)
                             if servopwm[active-1] > maxmum[active-1]:
                                 servopwm[active-1] = maxmum[active-1]
-                        elif axis < 0:
+                        elif axis < -0.1:
                             active=1
                             servopwm[active-1] -= axfactor * abs(axis)
                             if servopwm[active-1] < minmum[active-1]:
                                 servopwm[active-1] = minmum[active-1]
-                    elif i==1:							#linker stick, u-d
-                        if axis ==0:
+                    elif i==1:							#left stick, u-d
+                        if axis <= 0.1 and >= -0.1:
                             pass
-                        elif axis <0:					#move forward
+                        elif axis < -0.1:					#move forward
                             active=2
                             servopwm[active-1] += axfactor * abs(axis)
                             if servopwm[active-1] > maxmum[active-1]:
                                 servopwm[active-1] = maxmum[active-1]
-                        elif axis>0:
+                        elif axis> 0.1:
                             active=2
                             servopwm[active-1] -= axfactor * abs(axis)
                             if servopwm[active-1] < minmum[active-1]:
                                 servopwm[active-1] = minmum[active-1]
                     elif i ==4:							#right stick, u-d
-                        if axis==0:
+                        if axis <= 0.1 and >= -0.1:
                             pass
-                        elif axis<0:
+                        elif axis< -0.1:
                             active=3
                             servopwm[active-1] -= axfactor * abs(axis)
                             if servopwm[active-1] < minmum[active-1]:
                                 servopwm[active-1] = minmum[active-1]
-                        elif axis>0:
+                        elif axis>0.1:
                             active=3
                             servopwm[active-1] += axfactor * abs(axis)
                             if servopwm[active-1] > maxmum[active-1]:
