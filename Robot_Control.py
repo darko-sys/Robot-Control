@@ -43,7 +43,6 @@ clock = pygame.time.Clock() #maybe useful, if you want to reduce CPU load. Then 
 
 def moveServo(act, pulse):	# a function to move the servos. It contains a smoothing algorithm, preventing all too sudden movements of the robot. experimental, not elaborated to satisfaction
     incTime=1.0/100.0
-    servopwm[act-1] = pulse
     incMove=(pulse - tmp[act-1])/100
     if act == 1:
         for x in range(100):
